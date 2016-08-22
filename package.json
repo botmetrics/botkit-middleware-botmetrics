@@ -1,0 +1,24 @@
+{
+  "name": "botkit-middleware-botmetrics",
+  "version": "0.0.1",
+  "description": "Botkit Middleware for Botmetrics",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botmetrics/botkit-middleware-botmetrics.git"
+  },
+  "keywords": [
+    "botkit",
+    "bots",
+    "botmetrics"
+  ],
+  "author": "Vlad Shevtsov, Arun Thampi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/botmetrics/botkit-middleware-botmetrics/issues"
+  },
+  "homepage": "https://github.com/botmetrics/botkit-middleware-botmetrics#readme"
+}
