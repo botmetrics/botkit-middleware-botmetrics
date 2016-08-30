@@ -1,1 +1,1 @@
-module.exports.facebook = require('./facebook')
+module.exports.Facebook = require('./src/facebook');

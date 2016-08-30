@@ -20,5 +20,18 @@
   "bugs": {
     "url": "https://github.com/botmetrics/botkit-middleware-botmetrics/issues"
   },
-  "homepage": "https://github.com/botmetrics/botkit-middleware-botmetrics#readme"
+  "homepage": "https://github.com/botmetrics/botkit-middleware-botmetrics#readme",
+  "dependencies" : {
+    "request": "2.74.0",
+    "dotenv": "2.0.0",
+    "botkit": "0.2.2",
+    "scoped-http-client": "0.11.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0",
+    "sinon-chai": "^2.8.0",
+    "sinon": "~1.17.0",
+    "chai": "~2.1.0",
+    "nock": "~7.0.2"
+  }
 }

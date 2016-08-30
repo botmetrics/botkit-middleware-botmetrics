@@ -1,13 +1,55 @@
+var HttpClient = require('scoped-http-client');
+
 module.exports = function(credentials) {
   if (!credentials || !credentials.botId || !credentials.apiKey) {
     throw new Error('No bot id or api key specified');
   }
 
-  var facebook = {}
+  var host = process.env.BOTMETRICS_API_HOST || 'http://localhost:3000'
+  var url = host + "/bots/" + credentials.botId + "/events";
+  var http = HttpClient.create(url);
 
-  facebook.receive = function () {
-    console.log('botId: ' + credentials.botId + ';\napiKey: ' + credentials.apiKey + ';');
+  var Facebook = {}
+
+  Facebook.receive = function (bot, message, next) {
+    var event = JSON.stringify(facebookEvent(message));
+
+    http.header('Authorization', credentials.apiKey).
+         header('Content-Type', 'application/json').
+         post(JSON.stringify({event: event, format: 'json'}))(function(err, resp, body) {
+      if(err) {
+        next(err);
+      } else if (resp.statusCode != 202) {
+        next(new Error("Unexpected Status Code from Botmetrics API"));
+      } else {
+        next()
+      }
+    });
   }
 
-  return facebook
+  function facebookEvent(message) {
+    if(!message) {
+      return null
+    } else {
+      return {
+        object: 'page',
+        entry: [{
+          messaging: [{
+            sender: {
+              id: message.user
+            },
+            timestamp: message.timestamp,
+            message: {
+              text: message.text,
+              mid: message.mid,
+              seq: message.seq,
+              attachments: message.attachments
+            }
+          }]
+        }]
+      }
+    }
+  }
+
+  return Facebook
 }
