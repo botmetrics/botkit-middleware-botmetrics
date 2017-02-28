@@ -28,8 +28,8 @@ Require `botkit-middleware-botmetrics` and use the middleware in your bot like s
 
 ```javascript
 require('botkit-middleware-botmetrics')({
-  botmetricsbotid: process.env.BOTMETRICS_BOT_ID,
-  botmetricsapikey: process.env.BOTMETRICS_API_KEY,
+  botmetricsBotId: process.env.BOTMETRICS_BOT_ID,
+  botmetricsApiKey: process.env.BOTMETRICS_API_KEY,
   controller: controller
 });
 ```
@@ -59,7 +59,7 @@ have hosted your Botmetrics instance at
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/botmetrics/botmetrics.js. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/botmetrics/botkit-middleware-botmetrics. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
