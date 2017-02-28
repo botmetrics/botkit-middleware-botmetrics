@@ -26,6 +26,15 @@ module.exports = function(config) {
     return botmetricsUsage();
   }
 
+  config.controller.on('create_team', function(bot, team) {
+    if(bot.type == 'slack') {
+      if (!team.bot) {
+        return;
+      }
+      postToRegisterAPI(team.bot.token);
+    }
+  });
+
   config.controller.on('message_received', function(bot, message) {
     if (bot.type == 'fb') {
       var event = JSON.stringify(botkitToFacebookMessage(message));
@@ -62,6 +71,28 @@ module.exports = function(config) {
     http.header('Authorization', config.botmetricsApiKey).
        header('Content-Type', 'application/json').
        post(JSON.stringify({event: event, format: 'json'}))(function(err, resp, body) {
+      if(err) {
+        console.log("error posting to botmetrics API: ", error);
+      } else if (resp.statusCode != 202) {
+        console.log("error posting to botmetrics API: ", new Error("Unexpected Status Code from Botmetrics API"));
+      }
+    });
+  }
+
+  function postToRegisterAPI(token) {
+    var host = process.env.BOTMETRICS_API_HOST || 'https://www.getbotmetrics.com'
+    var url = host + "/bots/" + config.botmetricsBotId + "/instances";
+    var http = HttpClient.create(url);
+    var params = {
+      instance: {
+        token: token
+      },
+      format: 'json'
+    };
+
+    http.header('Authorization', config.botmetricsApiKey).
+       header('Content-Type', 'application/json').
+       post(JSON.stringify(params))(function(err, resp, body) {
       if(err) {
         console.log("error posting to botmetrics API: ", error);
       } else if (resp.statusCode != 202) {
