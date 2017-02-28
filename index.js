@@ -1,1 +1,1 @@
-module.exports.Facebook = require('./src/facebook');
+module.exports = require('./src/middleware');
