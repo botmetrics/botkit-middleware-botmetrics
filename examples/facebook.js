@@ -26,7 +26,7 @@ controller.setupWebserver(process.env.PORT || 3000, function(err, webserver) {
   });
 });
 
-require('./index')({
+require('../index')({
   botmetricsBotId: process.env.BOTMETRICS_BOT_ID,
   botmetricsApiKey: process.env.BOTMETRICS_API_KEY,
   controller: controller
